@@ -105,6 +105,7 @@ import italy from './countries/italy.geojson';
 import italy_regions from './countries/italy_regions.geojson';
 import ivory_coast from './countries/ivory_coast.geojson';
 import japan from './countries/japan.geojson';
+import jersey from './countries/jersey_final.geojson'; 
 import jordan from './countries/jordan.geojson';
 import kazakhstan from './countries/kazakhstan.geojson';
 import kenya from './countries/kenya.geojson';
@@ -307,7 +308,8 @@ export const countries = {
   italy,
   italy_regions,
   ivory_coast,
-  japan,
+  japan, 
+  jersey, 
   jordan,
   kazakhstan,
   kenya,
