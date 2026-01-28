@@ -43,9 +43,7 @@ import {
 import { t } from '@apache-superset/core';
 import {
   ensureIsArray,
-  FeatureFlag,
   isAdhocColumn,
-  isFeatureEnabled,
   isPhysicalColumn,
   validateInteger,
   QueryFormColumn,
@@ -252,7 +250,7 @@ const config: ControlPanelConfig = {
               visibility: ({ controls }) => {
                 const dttmLookup = Object.fromEntries(
                   ensureIsArray(controls?.groupby?.options).map(option => [
-                    option.column_name,
+                    (option.column_name || '').toLowerCase(),
                     option.is_dttm,
                   ]),
                 );
@@ -263,7 +261,7 @@ const config: ControlPanelConfig = {
                       return true;
                     }
                     if (isPhysicalColumn(selection)) {
-                      return !!dttmLookup[selection];
+                      return !!dttmLookup[(selection || '').toLowerCase()];
                     }
                     return false;
                   })
@@ -752,9 +750,7 @@ const config: ControlPanelConfig = {
         showCalculationType: false,
         showFullChoices: false,
       }),
-      visibility: ({ controls }) =>
-        isAggMode({ controls }) &&
-        isFeatureEnabled(FeatureFlag.TableV2TimeComparisonEnabled),
+      visibility: isAggMode,
     },
   ],
   formDataOverrides: formData => ({
